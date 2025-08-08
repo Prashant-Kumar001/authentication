@@ -17,10 +17,12 @@ export const verifyToken = (token: string) => {
   try {
 
     const decoded = jwt.verify(token, process.env.NEXT_AUTH_JWT_SECRET || "") as User;
-    return decoded.id;
+    return decoded.id as string;
 
 
   } catch (error) {
     throw new Error("Invalid token");
   }
 };
+
+

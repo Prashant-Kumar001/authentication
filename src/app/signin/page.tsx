@@ -78,6 +78,14 @@ export default function SignIn() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Your password"
           />
+          <p>
+            <Link
+              href="/forgot-password"
+              className="text-purple-600 text-[13px] font-bold hover:underline"
+            >
+              Forgot password?
+            </Link>
+          </p>
         </div>
         <button
           type="submit"

@@ -6,9 +6,13 @@ export interface IUser extends Document {
   password: string;
   role: string;
   isVerified: boolean;
-  forGotPasswordToken: string;
-  verificationToken: string;
-  forGotPasswordExpires: Date;
+
+  forGotPasswordToken: string | undefined;
+  forGotPasswordExpires: Date | undefined;
+  ChangeAt: Date;
+
+  verificationToken: string | undefined;
+  verifyTokenExpiry: Date | undefined;
   verifiedAt: Date;
 
   createdAt: Date;
@@ -49,7 +53,11 @@ const UserSchema = new Schema<IUser>(
     },
     forGotPasswordToken: String,
     forGotPasswordExpires: Date,
+    ChangeAt: Date,
+
+
     verificationToken: String,
+    verifyTokenExpiry: Date,
     verifiedAt: Date,
   },
   { timestamps: true }
