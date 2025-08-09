@@ -2,10 +2,10 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-const VerifyToken = () => {
+const VerifyTokenContent = () => {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const router = useRouter();
@@ -25,7 +25,7 @@ const VerifyToken = () => {
         toast.success("Email verified successfully");
         router.push("/profile");
       } catch (error) {
-        console.log(error);
+        console.error(error);
         setStatus("error");
       }
     };
@@ -60,4 +60,10 @@ const VerifyToken = () => {
   );
 };
 
-export default VerifyToken;
+export default function VerifyToken() {
+  return (
+    <Suspense fallback={<div className="text-center p-6">Loading...</div>}>
+      <VerifyTokenContent />
+    </Suspense>
+  );
+}
