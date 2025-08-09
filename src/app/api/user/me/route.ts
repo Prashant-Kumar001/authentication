@@ -12,6 +12,7 @@ export async function GET(req: NextRequest) {
         const user = await User.findById(id).select("-password");
         return NextResponse.json({ user }, { status: 200 });
     } catch (error) {
+        console.log(error);
         return NextResponse.json({ error: "Server error" }, { status: 500 });
     }
 }

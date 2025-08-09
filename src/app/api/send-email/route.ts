@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { verifyToken } from "@/helper/utils";
 import { User } from "@/models/user";
 import { sendVerificationEmail } from "@/helper/mailer";
+import { Types } from "mongoose";
 
 export async function POST(req: NextRequest) {
   try {
@@ -22,7 +23,7 @@ export async function POST(req: NextRequest) {
       const result = await sendVerificationEmail({
         email: user.email,
         emailType: "VERIFY",
-        userId: user._id,
+        userId: user._id as Types.ObjectId,
       });
 
        if (result && result.success) {
@@ -34,6 +35,7 @@ export async function POST(req: NextRequest) {
 
     }
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

@@ -21,6 +21,7 @@ export const verifyToken = (token: string) => {
 
 
   } catch (error) {
+    console.log(error)
     throw new Error("Invalid token");
   }
 };

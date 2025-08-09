@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 
-export async function GET(req: NextRequest) {
+export async function GET() {
     try {
 
         const res = NextResponse.json({ message: "Logout successful" }, { status: 200 });
@@ -9,6 +9,7 @@ export async function GET(req: NextRequest) {
         return res;
 
     } catch (error) {
+        console.log(error);
         return NextResponse.json({ error: "Server error" }, { status: 500 });
     }
 }

@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyToken } from "@/helper/utils";
 import { User } from "@/models/user";
 import { sendVerificationEmail } from "@/helper/mailer";
 import { Types } from "mongoose";
@@ -39,6 +38,7 @@ export async function POST(req: NextRequest) {
       }
     }
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

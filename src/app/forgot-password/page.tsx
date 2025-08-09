@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from "react";
@@ -33,9 +32,8 @@ const ForgotPasswordPage: React.FC = () => {
         "password reset link sent to your email"
       );
       setEmail("");
-    } catch (err: any) {
-      if (err?.response?.data?.error) setError(err.response.data.error);
-      else setError(err?.message || "An unexpected error occurred.");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "An unexpected error occurred.");
     } finally {
       setLoading(false);
     }
