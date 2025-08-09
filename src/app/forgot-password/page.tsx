@@ -44,10 +44,10 @@ const ForgotPasswordPage: React.FC = () => {
     <main className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
       {loading && <Loader />}
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow">
-        <h1 className="text-2xl font-semibold mb-2">Forgot your password?</h1>
+        <h1 className="text-2xl font-semibold mb-2">Forgot your password</h1>
         <p className="text-sm text-gray-600 mb-6">
-          Enter the email associated with your account and we'll send a link to
-          reset your password.
+          Enter the email associated with your account and we&apos;ll send a
+          link to reset your password.
         </p>
 
         <form onSubmit={handleSubmit} aria-label="forgot-password-form">
@@ -92,8 +92,8 @@ const ForgotPasswordPage: React.FC = () => {
         </form>
 
         <p className="mt-6 text-xs text-gray-500">
-          If you don't receive an email, check your spam folder or try again
-          later.
+          If you don&apos;t receive an email, check your spam folder or try
+          again later.
         </p>
       </div>
     </main>
