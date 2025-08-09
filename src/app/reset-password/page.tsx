@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import Loader from "@/components/Loader";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-const ChangePassword: React.FC = () => {
+const ChangePasswordForm: React.FC = () => {
   const searchParams = useSearchParams();
   const token = searchParams.get("token") as string;
 
@@ -50,9 +50,8 @@ const ChangePassword: React.FC = () => {
       setConfirmPassword("");
       toast.success(res.data?.message || "Password updated successfully.");
       router.push("/signin");
-    } catch (err) {
-      console.log(err);
-      setError("Failed to load profile");
+    } catch {
+      setError("Failed to update password.");
     } finally {
       setLoading(false);
     }
@@ -124,4 +123,10 @@ const ChangePassword: React.FC = () => {
   );
 };
 
-export default ChangePassword;
+export default function ChangePasswordPage() {
+  return (
+    <Suspense fallback={<Loader />}>
+      <ChangePasswordForm />
+    </Suspense>
+  );
+}

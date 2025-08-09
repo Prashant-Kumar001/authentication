@@ -9,7 +9,12 @@ export async function GET(req: NextRequest) {
         await dbConnect();
         const token = req.cookies.get("token")?.value || "";
         const id = verifyToken(token);
-        const user = await User.findById(id).select("-password");
+        const user = await User.findOne({
+            _id: id
+        }).select("-password");
+        if(!user) {
+            return NextResponse.json({ error: "User not found" }, { status: 404 });
+        }
         return NextResponse.json({ user }, { status: 200 });
     } catch (error) {
         console.log(error);

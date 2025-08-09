@@ -3,7 +3,7 @@ import { NextResponse, NextRequest } from "next/server";
 export function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
 
-  const isPublicPath = path === "/signin" || path === "/signup" ;
+  const isPublicPath = path === "/signin" || path === "/signup" || path === "/verifyemail" || path === "/send-email" || path === "/reset-password" || path === "/forgot-password";
 
   const token = req.cookies.get("token")?.value || "";
 
