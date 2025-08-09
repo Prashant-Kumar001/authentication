@@ -47,16 +47,9 @@ export default function Signup() {
       toast.success(res.data.message);
       router.push("/signin");
 
-    } catch (err: unknown) {
-       if (axios.isAxiosError(err)) {
-         setError(
-           err.response?.data?.error || err.message || "Failed to logout"
-         );
-       } else if (err instanceof Error) {
-         setError(err.message);
-       } else {
+    } catch (err) {
+         console.log(err);
          setError("Failed to load profile");
-       }
     } finally {
       setLoading(false);
     }

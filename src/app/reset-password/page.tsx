@@ -50,16 +50,9 @@ const ChangePassword: React.FC = () => {
       setConfirmPassword("");
       toast.success(res.data?.message || "Password updated successfully.");
       router.push("/signin");
-    } catch (err: unknown) {
-      if (axios.isAxiosError(err)) {
-        setError(
-          err.response?.data?.error || err.message || "Failed to logout"
-        );
-      } else if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("Failed to load profile");
-      }
+    } catch (err) {
+      console.log(err);
+      setError("Failed to load profile");
     } finally {
       setLoading(false);
     }
@@ -67,9 +60,7 @@ const ChangePassword: React.FC = () => {
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
-        {
-            loading && <Loader />
-        }
+      {loading && <Loader />}
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow">
         <h1 className="text-2xl font-semibold mb-2">Change Password</h1>
         <p className="text-sm text-gray-600 mb-6">
@@ -109,7 +100,11 @@ const ChangePassword: React.FC = () => {
             className="w-full px-3 py-2 border border-gray-200 rounded-3xl focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500 duration-300 ease-in-out mb-4"
           />
 
-          <button className="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 rounded-3xl" type="submit" disabled={loading} >
+          <button
+            className="w-full bg-purple-500 hover:bg-purple-600 text-white py-2 rounded-3xl"
+            type="submit"
+            disabled={loading}
+          >
             {loading ? "Updating…" : "Update Password"}
           </button>
         </form>

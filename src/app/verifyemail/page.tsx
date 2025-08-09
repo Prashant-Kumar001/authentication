@@ -23,17 +23,10 @@ const VerifyToken = () => {
       try {
         await axios.post("/api/verify-email", { token });
         toast.success("Email verified successfully");
-        router.push("/profile"); 
-      } catch (error: unknown) {
-
-
-         if (axios.isAxiosError(error)) {
-           setStatus(error.response?.data?.error || "error");
-         } else if (error instanceof Error) {
-           setStatus("error");
-         } else {
-          setStatus("error");
-         }
+        router.push("/profile");
+      } catch (error) {
+        console.log(error);
+        setStatus("error");
       }
     };
 

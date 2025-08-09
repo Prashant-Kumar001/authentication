@@ -32,8 +32,9 @@ const ForgotPasswordPage: React.FC = () => {
         "password reset link sent to your email"
       );
       setEmail("");
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "An unexpected error occurred.");
+    } catch (err) {
+      console.log(err)
+      setError("An unexpected error occurred.");
     } finally {
       setLoading(false);
     }
