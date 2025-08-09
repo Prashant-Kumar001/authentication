@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import React from "react";
 
 const page = () => {
-    const params = useParams();
+     const params = useParams<{ id: string }>();
     console.log(params);
     return <div>someone profile</div>;
 };

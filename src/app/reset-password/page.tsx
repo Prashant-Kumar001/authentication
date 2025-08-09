@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 
 const ChangePassword: React.FC = () => {
   const searchParams = useSearchParams();
-  const token = searchParams.get("token");
+  const token = searchParams.get("token") as string;
 
   const router = useRouter();
 
@@ -50,9 +50,16 @@ const ChangePassword: React.FC = () => {
       setConfirmPassword("");
       toast.success(res.data?.message || "Password updated successfully.");
       router.push("/signin");
-    } catch (err: any) {
-      if (err?.response?.data?.error) setError(err.response.data.error);
-      else setError(err?.message || "An unexpected error occurred.");
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setError(
+          err.response?.data?.error || err.message || "Failed to logout"
+        );
+      } else if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Failed to load profile");
+      }
     } finally {
       setLoading(false);
     }

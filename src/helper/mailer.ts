@@ -1,11 +1,12 @@
 import nodemailer from "nodemailer";
 import { User } from "@/models/user";
 import bcrypt from "bcryptjs";
+import { Types } from "mongoose";
 
 type props = {
   email: string;
   emailType: "VERIFY" | "RESET";
-  userId: any;
+  userId: Types.ObjectId;
 };
 
 export const sendVerificationEmail = async ({
@@ -82,7 +83,7 @@ export const sendVerificationEmail = async ({
     }
 
 
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error sending verification email:", error);
   }
 };

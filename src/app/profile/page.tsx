@@ -24,8 +24,16 @@ const Profile = () => {
       setUser(userData);
       setError("");
       toast.success("Profile loaded");
-    } catch (err: any) {
-      setError(err.response?.data?.error || "Failed to load profile");
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setError(
+          err.response?.data?.error || err.message || "Failed to load profile"
+        );
+      } else if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Failed to load profile");
+      }
       setUser(null);
     } finally {
       setLoading(false);
@@ -37,8 +45,17 @@ const Profile = () => {
       await axios.get("/api/auth/logout");
       toast.success("Logout successful");
       router.push("/signin");
-    } catch (error: any) {
-      toast.error(error.response?.data?.error || "Logout failed");
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setError(
+          err.response?.data?.error || err.message || "Failed to logout"
+        );
+      } else if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Failed to load profile");
+      }
+      setUser(null);
     }
   };
 
@@ -47,10 +64,16 @@ const Profile = () => {
       setLoading2(true);
       await axios.post("/api/send-email");
       toast.success(" link has been sent to your email");
-    } catch (error: any) {
-      toast.error(
-        error.response?.data?.error || "Failed to send verification email"
-      );
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        setError(
+          err.response?.data?.error || err.message || "Failed to logout"
+        );
+      } else if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Failed to load profile");
+      }
     } finally {
       setLoading2(false);
     }
